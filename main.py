@@ -135,7 +135,7 @@ def main(args):
     print("git:\n  {}\n".format(utils.get_sha()))
 
     if args.frozen_weights is not None:
-        assert args.masks, "Frozen training is meant for segmentation only"
+        assert args.masks, "Frozen training is meant for segmentation only" # mask head
     print(args)
 
     device = torch.device(args.device)
@@ -158,7 +158,7 @@ def main(args):
 
     if args.distributed:
         if args.cache_mode:
-            sampler_train = samplers.NodeDistributedSampler(dataset_train)
+            sampler_train = samplers.NodeDistributedSampler(dataset_train) #?
             sampler_val = samplers.NodeDistributedSampler(dataset_val, shuffle=False)
         else:
             sampler_train = samplers.DistributedSampler(dataset_train)
